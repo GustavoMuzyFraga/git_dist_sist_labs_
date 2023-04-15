@@ -2,7 +2,7 @@
 
 import socket
 
-HOST = '192.168.1.71' # maquina onde esta o par passivo
+HOST = 'localhost' # maquina onde esta o par passivo
 PORTA = 5000        # porta que o par passivo esta escutando
 
 # cria socket

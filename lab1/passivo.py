@@ -14,7 +14,7 @@ sock.bind((HOST, PORTA))
 # define o limite maximo de conexoes pendentes e coloca-se em modo de espera por conexao
 sock.listen(5) 
 
-print("Pronto para receber conexões...")
+#print("Pronto para receber conexões...")
 
 # aceita a primeira conexao da fila (chamada pode ser BLOQUEANTE)
 novoSock, endereco = sock.accept() # retorna um novo socket e o endereco do par conectado
