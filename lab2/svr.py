@@ -38,9 +38,9 @@ def aceitaConexao(sock):
 #e retorna mensagem para o cliente
 def insert(clisock,endr, data, lock):
 
-	#Adquirimos um lock para 
-	#proteger a integridade do dicionario
-	#perante varias requisicoes concorrentes
+    #Adquirimos um lock para 
+    #proteger a integridade do dicionario
+    #perante varias requisicoes concorrentes
     lock.acquire()
 
     #Se a chave ja existe no dicionario,
