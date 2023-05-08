@@ -21,16 +21,43 @@ Quando abrimos o sistema, o dicionário é carregado do arquivo para a memória 
 ![image](https://user-images.githubusercontent.com/29666473/236663502-31beedc5-465b-46f4-b8be-0f6cb3f02a9a.png)
 
 
-
+----
 
 
 
 - Atividade 2
 
-1. Cliente:
+1. Cliente: interface simples, query (consulta) e insert
 
-2. Servidor:
+2. Servidor: consulta dicionário, insere no dicionário, dicionário salvo na memória, save/load e arquivo onde o dicionário é salvo
 
-3. 
+3. 1. Através da interface simples, o cliente digita o comando:
+   2. Insert ou 1, a chave que deseja inserir e o valor da chave
+   3. Insert adiciona esses argumentos numa mensagem e envia para o servidor processar com o insere no dicionário
+   4. O servidor checa se a chave no banco, caso não exista ele salva uma mensagem dizendo que adicionou, caso contrário salva uma mensagem dizendo que a chave existe
+   5. Em seguida o servidor envia essa mensagem para o cliente receber pelo insert
+   6. Por fim, o insert exibe a mensagem na interface simples
+
+-
+
+3. 1. Através da interface simples, o cliente digita o comando:
+   2. Query ou 2, a chave que deseja consultar
+   3. Query adiciona esses argumentos numa mensagem e envia para o servidor processar com o consulta dicionário
+   4. O servidor checa se a chave no banco, caso não exista ele salva uma mensagem com consulta vazia, caso contrário salva uma mensagem com o valor
+   5. Em seguida o servidor envia essa mensagem para o cliente receber pelo query
+   6. Por fim, o query exibe a mensagem na interface simples
+
+
 
 ![image](https://user-images.githubusercontent.com/29666473/236663571-b66ad1d7-becb-4039-b265-9f6fed7e21ab.png)
+
+----
+
+
+- Atividade 3
+
+Notas:
+
+Inicialmente foi pensado em apenas 3 funcionalidades, inserir, consultar e deletar. Desde o início, ja tinha uma visão breve da arquitetura de sistemas. Especificamente, inserir e consultar, que tiveram que ser partidas entre cliente e servidor, então foram criados Insert (e inserir no dicionário) e Query (e consuta dicionário). Logo uma parte ficou para a camada de interface e a outra para processamento. E a função de deletar, como pedido no trabalho, apenas era realizada pelo administrador, então esta também ficou na camada de processamento. Depois dessa parte ter sido pensada, havia a necessidade de uma funcionalidade que salvava/carregava o dicionário no/do arquivo, então o save/load foi criado. Novamente, como apenas o servidor ficaria com o dicionário, não tinha necessidade de nenhuma parte dele ficar para o cliente.
+
+Na parte do código, utilizei como base o código dado em aula
