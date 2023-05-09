@@ -62,6 +62,8 @@ Inicialmente foi pensado em apenas 3 funcionalidades, inserir, consultar e delet
 
 Na parte do código, utilizei como base o código de multiprocessing dado em aula e funções como delete, save/load foram simples. Para o dicionário ser consistente entre todos os processos, eu tive que iniciar um manager. Além disso, eu utilizei um lock na função de insert e delete para preservar a integridade da estrutura de dados (dicionário).
 
+Por fim, uma das dificuldades foram os recieves do cliente e do servidor. O lado do servidor foi relativamente tranquilo, utilizei um loop que fica recebendo chunks e tenta construir a mensagem usando o pickle, caso não consiga, eu capturo a exeção e do continue no loop. O chunk vazio é chegado quando o cliente se desconecta do servidor, assim o loop é quebrado. Já do lado do cliente, não havia como receber um chunk vazio, pois o servidor não podia (nesse trabalho), visto que o cliente deve ficar conectado ao servidor até sair e pode haver outra requisição após a outra. Sendo assim, a solução que cheguei é o servidor medir o tamanho da mensagem e enviar antes da mensagem em si, dessa forma o cliente sabe quantos bytes tem que ficar recebendo para construir a mensagem.  
+OBS: Eu testei isso inserindo no dicionário um valor gigante, esta mensagem tanto tinha que ser recebida pelo servidor na hora da inserção, quanto recebida completa pelo cliente na hora de uma consulta.
 
 
 
