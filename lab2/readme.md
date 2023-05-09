@@ -60,4 +60,8 @@ Notas:
 
 Inicialmente foi pensado em apenas 3 funcionalidades, inserir, consultar e deletar. Desde o início, ja tinha uma visão breve da arquitetura de sistemas. Especificamente, inserir e consultar, que tiveram que ser partidas entre cliente e servidor, então foram criados Insert (e inserir no dicionário) e Query (e consuta dicionário). Logo uma parte ficou para a camada de interface e a outra para processamento. E a função de deletar, como pedido no trabalho, apenas era realizada pelo administrador, então esta também ficou na camada de processamento. Depois dessa parte ter sido pensada, havia a necessidade de uma funcionalidade que salvava/carregava o dicionário no/do arquivo, então o save/load foi criado. Novamente, como apenas o servidor ficaria com o dicionário, não tinha necessidade de nenhuma parte dele ficar para o cliente.
 
-Na parte do código, utilizei como base o código dado em aula
+Na parte do código, utilizei como base o código de multiprocessing dado em aula e funções como delete, save/load foram simples. Para o dicionário ser consistente entre todos os processos, eu tive que iniciar um manager. Além disso, eu utilizei um lock na função de insert e delete para preservar a integridade da estrutura de dados (dicionário).
+
+
+
+
