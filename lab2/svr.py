@@ -90,7 +90,12 @@ def query(endr, data):
 
 
 #Funcao delete do admnistrado
-def delete():
+def delete(dictionary,lock):
+
+    #Adquirimos um lock para 
+    #proteger a integridade do dicionario
+    #perante varias requisicoes concorrentes
+    lock.acquire()
 
 	#Pega a chave a ser deletada
     print("Digite a chave a ser deletada")
@@ -108,6 +113,10 @@ def delete():
 
     #Loga se deletou ou nao
     print(msg)
+
+    #liberamos o lock
+    lock.release() 
+
     return
 
 
@@ -218,7 +227,7 @@ def main():
 
 				#Tratar os comandos do administrador
 				if cmd == 'check': print(dictionary)
-				elif cmd == 'delete': delete()
+				elif cmd == 'delete': delete(dictionary,lock)
 				elif cmd == 'fim': 
 					for c in clientes: c.join()
 					sock.close()
