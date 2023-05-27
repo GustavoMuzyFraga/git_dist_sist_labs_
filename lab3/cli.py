@@ -44,8 +44,10 @@ def fazRequisicoes(conn):
 
 
 		elif msg == 'save' or msg == '4':
-			print("Digite a senha para salvar o dicionario")
-			ret = conn.root.save(input())
+			ret = conn.root.save()
+
+		elif msg == 'stop':
+			ret = conn.root.stop_server()
 
 		#Else para caso alguma outra coisa seja digitada
 		else:

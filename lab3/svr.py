@@ -55,6 +55,7 @@ class Echo(rpyc.Service):
 		self.client_addresses = {}
 		self.current_client_address = None
 		self.lock = multiprocessing.Lock()
+		#self.server = None
 
 	# executa quando uma conexao eh criada
 	def on_connect(self, conn):
@@ -68,6 +69,8 @@ class Echo(rpyc.Service):
 		client_address = self.client_addresses.pop(conn, None)
 		if client_address is not None:
 			print("Conexao finalizada:", client_address[0] + ":" + str(client_address[1]))
+
+	def exposed_stop_server(self): self.server.close()
 
 
 	def exposed_insert(self, data):
@@ -136,20 +139,12 @@ class Echo(rpyc.Service):
 		return msg
   
 
-	def exposed_save(self, password):
+	def exposed_save(self):
+		with self.lock: save()
+		return dictionary
 
-		if(password=='queroMeFormar'): 
-			with self.lock:
-				save()
-
-			msg=dictionary
-
-		else:
-			msg='Senha Negada'
-
-		return msg
-
-
+	#def exposed_stop_server(self):
+	#	self.Server.close()
 
 # dispara o servidor
 def main():
@@ -162,6 +157,5 @@ def main():
 
 	srv = ForkingServer(Echo, port = PORTA)
 	srv.start()
-
 
 main()
