@@ -15,7 +15,7 @@ def fazRequisicoes(conn):
 	while True: 
 
 		tosend =[]
-		msg = input("0 ou fim - encerrar\n1 ou insert - insere no dicionario\n2 ou query - consulta no dicionario\n3 ou del - deleta chave dicionario\n4 ou save - salva o dicionario\n")
+		msg = input("0 ou fim - encerrar\n1 ou insert - insere no dicionario\n2 ou query - consulta no dicionario\n3 ou del - deleta chave dicionario\n")
 		if msg == 'fim' or msg == '0': break
 
 
@@ -42,9 +42,6 @@ def fazRequisicoes(conn):
 			tosend.append(input())
 			ret = conn.root.delete(tosend)
 
-
-		elif msg == 'save' or msg == '4':
-			ret = conn.root.save()
 
 		#elif msg == 'stop':
 		#	ret = conn.root.stop_server()

@@ -67,8 +67,11 @@ class Echo(rpyc.Service):
 	# executa quando uma conexao eh fechada
 	def on_disconnect(self, conn):
 		client_address = self.client_addresses.pop(conn, None)
+		with self.lock: 
+			save()		
 		if client_address is not None:
 			print("Conexao finalizada:", client_address[0] + ":" + str(client_address[1]))
+
 
 	def exposed_stop_server(self): self.server.close()
 
@@ -139,9 +142,6 @@ class Echo(rpyc.Service):
 		return msg
   
 
-	def exposed_save(self):
-		with self.lock: save()
-		return dictionary
 
 	#def exposed_stop_server(self):
 	#	self.Server.close()
@@ -157,5 +157,6 @@ def main():
 
 	srv = ForkingServer(Echo, port = PORTA)
 	srv.start()
+	save()
 
 main()
