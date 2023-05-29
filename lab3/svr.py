@@ -67,8 +67,8 @@ class Echo(rpyc.Service):
 	# executa quando uma conexao eh fechada
 	def on_disconnect(self, conn):
 		client_address = self.client_addresses.pop(conn, None)
-		with self.lock: 
-			save()		
+		#with self.lock: 
+		#	save()		
 		if client_address is not None:
 			print("Conexao finalizada:", client_address[0] + ":" + str(client_address[1]))
 
@@ -97,6 +97,8 @@ class Echo(rpyc.Service):
 				print(str(self.current_client_address[0]) +':'+ str(self.current_client_address[1])+ ': Inseriu nova chave '+ str(data[1])+ ' como o valor ' + str(data[2]))
 				msg = "Adicionado: " +   str(data[1])  + ' : ' + str(dictionary[data[1]])
 
+			save()
+				
 		#retorna a mensagem a ser enviada
 		return msg
 
@@ -138,7 +140,8 @@ class Echo(rpyc.Service):
 			else:
 				msg = "Chave: "+str(data[1])+' nao possui valor'
 
-	   
+			save()
+				   
 		return msg
   
 
